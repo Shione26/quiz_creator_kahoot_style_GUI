@@ -10,8 +10,11 @@ window.title("Quiz Creator")
 icon = PhotoImage(file="Kahoot_Logo.png")
 window.iconphoto(True, icon)
 
-window.mainloop()
+bg_image = PhotoImage(file="bg_image.png").subsample(4, 4)
+bg_label = Label(window, image=bg_image)
+bg_label.place(relwidth=1, relheight=1)
 
+window.mainloop()
 # Create entry widget for the question
 # Create entry widget for options
 # Create entry widget for the correct answer

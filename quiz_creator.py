@@ -68,9 +68,15 @@ correct_ans = Entry(
 )
 correct_ans.place(x=530, y=270)
 
-window.mainloop()
-
 # Create button for submit
+submit_button = Button(window, text="Submit", font=("Montserrat", 10))
+submit_button.place(x=360, y=460)
+
+# Create button for exit program
+exit_button = Button(window, text="Exit", font=("Montserrat", 10))
+exit_button.place(x=320, y=460)
+
+window.mainloop()
 # Display save message using messagebox module
 # Create Exit Program
 # Open a text file for writing or appending the inputs

@@ -14,8 +14,19 @@ bg_image = PhotoImage(file="bg_image.png").subsample(4, 4)
 bg_label = Label(window, image=bg_image)
 bg_label.place(relwidth=1, relheight=1)
 
-window.mainloop()
 # Create entry widget for the question
+question = Entry(
+    window, 
+    font=("Montserrat", 10), 
+    bg="#f2f2f2", 
+    fg="#333333", 
+    width=60, 
+    justify="center"
+)
+question.place(x=130, y=50)
+
+window.mainloop()
+
 # Create entry widget for options
 # Create entry widget for the correct answer
 # Create button for submit

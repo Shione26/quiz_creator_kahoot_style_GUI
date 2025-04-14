@@ -3,6 +3,7 @@
 # Import tkinter and create the main window
 
 from tkinter import *
+from tkinter import messagebox 
 
 window = Tk()
 window.geometry("700x500")  # Edit the window title, size, icon, and background
@@ -77,6 +78,7 @@ def submit_inputs():
     file.write("c. " + option_entries[2].get() + "\n")
     file.write("d. " + option_entries[3].get() + "\n")
     file.write("Correct answer:" + correct_ans.get() + "\n\n")
+    messagebox.showinfo("Notice", "Item saved successfully!")    # Display save message using messagebox module
     reset_fields()
 
 def reset_fields():
@@ -94,7 +96,7 @@ exit_button = Button(window, text="Exit", font=("Montserrat", 10))
 exit_button.place(x=320, y=460)
 
 window.mainloop()
-# Display save message using messagebox module
+
 # Create Exit Program
 
 

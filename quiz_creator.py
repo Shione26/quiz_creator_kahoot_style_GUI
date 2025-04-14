@@ -5,9 +5,13 @@
 from tkinter import *
 
 window = Tk()
+window.geometry("700x500")  # Edit the window title, size, icon, and background
+window.title("Quiz Creator")
+icon = PhotoImage(file="Kahoot_Logo.png")
+window.iconphoto(True, icon)
 
 window.mainloop()
-# Edit the window title, size, icon, and background
+
 # Create entry widget for the question
 # Create entry widget for options
 # Create entry widget for the correct answer

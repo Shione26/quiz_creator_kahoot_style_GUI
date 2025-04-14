@@ -25,9 +25,38 @@ question = Entry(
 )
 question.place(x=130, y=50)
 
+# Create entry widget for options
+options_photo = PhotoImage(file="choices.png").subsample(2, 2)
+options_label = Label(window, image=options_photo)
+options_label.place(x=40, y=300)
+
+option = Entry(window, 
+              font=("Montserrat", 10), 
+              bg="white", 
+              fg="black", 
+              width=33, 
+              justify="center")
+
+def create_option_entry(x, y):
+    option = Entry(
+        window, 
+        font=("Montserrat", 10), 
+        bg="white", 
+        fg="gray", 
+        width=33, 
+        justify="center"
+    )
+    option.place(x=x, y=y)
+    return option
+
+option_entries = [
+    create_option_entry(80, 331),
+    create_option_entry(398, 331),
+    create_option_entry(80, 400),
+    create_option_entry(398, 400),
+]
 window.mainloop()
 
-# Create entry widget for options
 # Create entry widget for the correct answer
 # Create button for submit
 # Display save message using messagebox module

@@ -30,6 +30,7 @@ options_photo = PhotoImage(file="choices.png").subsample(2, 2)
 options_label = Label(window, image=options_photo)
 options_label.place(x=40, y=300)
 
+# Create entry widget for options
 option = Entry(window, 
               font=("Montserrat", 10), 
               bg="white", 
@@ -55,9 +56,20 @@ option_entries = [
     create_option_entry(80, 400),
     create_option_entry(398, 400),
 ]
-window.mainloop()
 
 # Create entry widget for the correct answer
+correct_ans = Entry(
+    window, 
+    font=("Montserrat", 10), 
+    bg="#fff7e6", 
+    fg="black", 
+    width=20, 
+    justify="center"
+)
+correct_ans.place(x=530, y=270)
+
+window.mainloop()
+
 # Create button for submit
 # Display save message using messagebox module
 # Create Exit Program

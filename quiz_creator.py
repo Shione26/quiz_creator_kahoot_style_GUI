@@ -68,8 +68,25 @@ correct_ans = Entry(
 )
 correct_ans.place(x=530, y=270)
 
+# Open a text file for writing or appending the inputs
+def submit_inputs():
+    file = open("input_data.txt", "a")      # Append the inputs into the text file
+    file.write("Question: " + question.get() + "\n")
+    file.write("a. " + option_entries[0].get() + "\n")
+    file.write("b. " + option_entries[1].get() + "\n")
+    file.write("c. " + option_entries[2].get() + "\n")
+    file.write("d. " + option_entries[3].get() + "\n")
+    file.write("Correct answer:" + correct_ans.get() + "\n\n")
+    reset_fields()
+
+def reset_fields():
+    question.delete(0, END)  
+    for entry in option_entries:
+        entry.delete(0, END) 
+    correct_ans.delete(0, END)
+
 # Create button for submit
-submit_button = Button(window, text="Submit", font=("Montserrat", 10))
+submit_button = Button(window, text="Submit", font=("Montserrat", 10), command=submit_inputs)
 submit_button.place(x=360, y=460)
 
 # Create button for exit program
@@ -79,6 +96,6 @@ exit_button.place(x=320, y=460)
 window.mainloop()
 # Display save message using messagebox module
 # Create Exit Program
-# Open a text file for writing or appending the inputs
-# Append the inputs into the text file
+
+
 

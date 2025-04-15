@@ -46,15 +46,23 @@ options_photo = PhotoImage(file="choices.png").subsample(2, 2)
 options_label = Label(window, image=options_photo)
 options_label.place(x=40, y=300)
 
-# Create entry widget for options
-option = Entry(window, 
-              font=("Montserrat", 10), 
-              bg="white", 
-              fg="black", 
-              width=33, 
-              justify="center")
+def focus_in_option(event):
+    # If the text in the entry is a placeholder,
+    if event.widget.get() in option_placeholders:   
+        event.widget.delete(0, END)         # delete from the start to end
+        event.widget.config(fg="black")     # and set text color to black
 
-def create_option_entry(x, y):
+def focus_out_option(event):
+    # If the text in the entry is empty, 
+    if event.widget.get() == "":
+        index = option_entries.index(event.widget)              # Find which entry widget triggered the event
+        event.widget.insert(0, option_placeholders[index])      # reappear the placeholder
+        event.widget.config(fg="gray")       # and set text color to gray
+
+option_placeholders = ["Add answer 1", "Add answer 2", "Add answer 3", "Add answer 4"]  # list of placeholders
+
+# Create entry widget for options
+def create_option_entry(x, y, placeholder):
     option = Entry(
         window, 
         font=("Montserrat", 10), 
@@ -63,14 +71,18 @@ def create_option_entry(x, y):
         width=33, 
         justify="center"
     )
+    option.insert(0, placeholder)   # Insert the placeholder text
+    option.bind("<FocusIn>", focus_in_option)   # Bind when entry is clicked
+    option.bind("<FocusOut>", focus_out_option) # Bind when user clicks away
     option.place(x=x, y=y)
     return option
 
+# Coordinates of the 4 entry widgets and their corresponding placeholders in the list
 option_entries = [
-    create_option_entry(80, 331),
-    create_option_entry(398, 331),
-    create_option_entry(80, 400),
-    create_option_entry(398, 400),
+    create_option_entry(80, 331, option_placeholders[0]),
+    create_option_entry(398, 331, option_placeholders[1]), 
+    create_option_entry(80, 400, option_placeholders[2]),
+    create_option_entry(398, 400, option_placeholders[3]),
 ]
 
 # Create entry widget for the correct answer

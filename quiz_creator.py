@@ -19,6 +19,9 @@ kahoot_photo = PhotoImage(file="bg.png").subsample(5, 5)
 kahoot_label = Label(window, image=kahoot_photo)
 kahoot_label.place(x=150, y=75)
 
+title = Label(window, text="Quiz Creator", fg="black")
+title.place(x=320, y=10 )
+
 def user_clicks_textbox(event):
     if question.get() == question_placeholder:
         question.delete(0, END)
@@ -63,7 +66,7 @@ def focus_out_option(event):
         event.widget.insert(0, option_placeholders[index])      # reappear the placeholder
         event.widget.config(fg="gray")       # and set text color to gray
 
-option_placeholders = ["Add answer 1", "Add answer 2", "Add answer 3", "Add answer 4"]  # list of placeholders
+option_placeholders = ["Add answer 1 (A)", "Add answer 2 (B)", "Add answer 3 (C)", "Add answer 4 (D)"]  # list of placeholders
 
 # Create entry widget for options
 def create_option_entry(x, y, placeholder):
@@ -89,15 +92,30 @@ option_entries = [
     create_option_entry(398, 400, option_placeholders[3]),
 ]
 
+correct_ans_placeholder = "Correct Answer"
+
+def focus_in_correct_ans(event):
+    if correct_ans.get() == correct_ans_placeholder:
+        correct_ans.delete(0, END)
+        correct_ans.config(fg="black")
+
+def focus_out_correct_ans(event):
+    if correct_ans.get() == "":
+        correct_ans.insert(0, correct_ans_placeholder)
+        correct_ans.config(fg="gray")
+
 # Create entry widget for the correct answer
 correct_ans = Entry(
     window, 
     font=("Montserrat", 10), 
     bg="#fff7e6", 
-    fg="black", 
+    fg="gray", 
     width=17, 
     justify="center"
 )
+correct_ans.insert(0, correct_ans_placeholder)
+correct_ans.bind("<FocusIn>", focus_in_correct_ans)
+correct_ans.bind("<FocusOut>", focus_out_correct_ans)
 correct_ans.place(x=550, y=270)
 
 # Open a text file for writing or appending the inputs

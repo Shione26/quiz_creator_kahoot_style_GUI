@@ -15,7 +15,19 @@ bg_image = PhotoImage(file="bg_image.png").subsample(4, 4)
 bg_label = Label(window, image=bg_image)
 bg_label.place(relwidth=1, relheight=1)
 
+def user_clicks_textbox(event):
+    if question.get() == question_placeholder:
+        question.delete(0, END)
+        question.config(fg="black")
+
+def user_clicks_away(event):
+    if question.get() == "":
+        question.insert(0, question_placeholder)
+        question.config(fg="gray")
+
 # Create entry widget for the question
+question_placeholder = "Start typing your question"
+
 question = Entry(
     window, 
     font=("Montserrat", 10), 
@@ -24,6 +36,9 @@ question = Entry(
     width=60, 
     justify="center"
 )
+question.insert(0, question_placeholder)
+question.bind("<FocusIn>", user_clicks_textbox)
+question.bind("<FocusOut>", user_clicks_away)
 question.place(x=130, y=50)
 
 # Create entry widget for options

@@ -15,6 +15,10 @@ bg_image = PhotoImage(file="bg_image.png").subsample(4, 4)
 bg_label = Label(window, image=bg_image)
 bg_label.place(relwidth=1, relheight=1)
 
+kahoot_photo = PhotoImage(file="bg.png").subsample(5, 5)
+kahoot_label = Label(window, image=kahoot_photo)
+kahoot_label.place(x=150, y=75)
+
 def user_clicks_textbox(event):
     if question.get() == question_placeholder:
         question.delete(0, END)
@@ -91,10 +95,10 @@ correct_ans = Entry(
     font=("Montserrat", 10), 
     bg="#fff7e6", 
     fg="black", 
-    width=20, 
+    width=17, 
     justify="center"
 )
-correct_ans.place(x=530, y=270)
+correct_ans.place(x=550, y=270)
 
 # Open a text file for writing or appending the inputs
 def submit_inputs():

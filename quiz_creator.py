@@ -91,13 +91,13 @@ def reset_fields():
 submit_button = Button(window, text="Submit", font=("Montserrat", 10), command=submit_inputs)
 submit_button.place(x=360, y=460)
 
+# Create Exit Program
+def exit_program():
+    if messagebox.askyesno("Notice", "Are you sure you want to exit?"):
+        window.destroy()
+
 # Create button for exit program
-exit_button = Button(window, text="Exit", font=("Montserrat", 10))
+exit_button = Button(window, text="Exit", font=("Montserrat", 10), command=exit_program)
 exit_button.place(x=320, y=460)
 
 window.mainloop()
-
-# Create Exit Program
-
-
-

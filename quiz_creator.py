@@ -122,7 +122,7 @@ correct_ans.place(x=550, y=270)
 def submit_inputs():
     name = filename_entry.get()     # for every new entry of filename, there'll be new text files
     if name == filename_placeholder or name.strip() == "":
-        messagebox.showwarning("Missing Filename", "Please enter a filename.")
+        messagebox.showwarning("Missing Filename", "Please enter a title")
         return
 
     correct = correct_ans.get().strip().upper()
@@ -148,7 +148,7 @@ def reset_fields():
     correct_ans.delete(0, END)
 
 # Placeholder for filename entry
-filename_placeholder = "Enter filename here"
+filename_placeholder = "Title of the Quiz"
 
 def focus_in_filename(event):
     if filename_entry.get() == filename_placeholder:

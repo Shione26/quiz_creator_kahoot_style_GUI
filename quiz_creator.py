@@ -15,12 +15,12 @@ bg_image = PhotoImage(file="bg_image.png").subsample(4, 4)
 bg_label = Label(window, image=bg_image)
 bg_label.place(relwidth=1, relheight=1)
 
-kahoot_photo = PhotoImage(file="bg.png").subsample(5, 5)
+kahoot_photo = PhotoImage(file="kahoot.png").subsample(5, 5)
 kahoot_label = Label(window, image=kahoot_photo)
 kahoot_label.place(x=150, y=75)
 
 title = Label(window, text="Quiz Creator", fg="black")
-title.place(x=320, y=10 )
+title.place(x=320, y=5 )
 
 def user_clicks_textbox(event):
     if question.get() == question_placeholder:
@@ -120,13 +120,24 @@ correct_ans.place(x=550, y=270)
 
 # Open a text file for writing or appending the inputs
 def submit_inputs():
-    file = open("input_data.txt", "a")      # Append the inputs into the text file
+    name = filename_entry.get()     # for every new entry of filename, there'll be new text files
+    if name == filename_placeholder or name.strip() == "":
+        messagebox.showwarning("Missing Filename", "Please enter a filename.")
+        return
+
+    correct = correct_ans.get().strip().upper()
+    if correct == "":
+        messagebox.showerror("Invalid Input", "Please enter the correct answer")
+        return
+
+    file = open(name + ".txt", "a")     # Append the inputs into the text file
     file.write("Question: " + question.get() + "\n")
     file.write("a. " + option_entries[0].get() + "\n")
     file.write("b. " + option_entries[1].get() + "\n")
     file.write("c. " + option_entries[2].get() + "\n")
     file.write("d. " + option_entries[3].get() + "\n")
     file.write("Correct answer:" + correct_ans.get() + "\n\n")
+    file.close()
     messagebox.showinfo("Notice", "Item saved successfully!")    # Display save message using messagebox module
     reset_fields()
 
@@ -135,6 +146,33 @@ def reset_fields():
     for entry in option_entries:
         entry.delete(0, END) 
     correct_ans.delete(0, END)
+
+# Placeholder for filename entry
+filename_placeholder = "Enter filename here"
+
+def focus_in_filename(event):
+    if filename_entry.get() == filename_placeholder:
+        filename_entry.delete(0, END)
+        filename_entry.config(fg="black")
+
+def focus_out_filename(event):
+    if filename_entry.get() == "":
+        filename_entry.insert(0, filename_placeholder)
+        filename_entry.config(fg="gray")
+
+# Create filename entry widget
+filename_entry = Entry(
+    window,
+    font=("Montserrat", 10),
+    bg="white",
+    fg="#333333",
+    width=30,
+    justify="center"
+)
+filename_entry.insert(0, filename_placeholder)
+filename_entry.bind("<FocusIn>", focus_in_filename)
+filename_entry.bind("<FocusOut>", focus_out_filename)
+filename_entry.place(x=245, y=28)  
 
 # Create button for submit
 submit_button = Button(window, text="Submit", font=("Montserrat", 10), command=submit_inputs)

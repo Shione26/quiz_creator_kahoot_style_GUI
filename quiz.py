@@ -1,6 +1,10 @@
 # Create the Quiz program that read the output file of the Quiz Creator. The user will answer the randomly selected question and check if the answer is correct.
 
 # read the file
+filename = input("Enter the filename (e.g. name.txt): ")
+with open(filename, "r") as file:
+    content = file.read()
+    print(content)
 # store the data
 # randomize the question order
 # create the main window

@@ -43,6 +43,7 @@ for i in range(0, len(lines), 6):
 
 # randomize the question order
 shuffled_quiz = random.sample(quiz_data, len(quiz_data))
+current_question_index = 0
 
 # loop through the randomized questions list
 
@@ -50,8 +51,17 @@ shuffled_quiz = random.sample(quiz_data, len(quiz_data))
 window = Tk()
 
 window.title(filename)
-window.geometry("700x500")
+window.geometry("700x400")
 window.config(bg="#f2f2f2")
+
+question_label = Label(window, text="", font=("Montserrat Black", 11, "bold"), bg="white", height=2)
+question_label.pack(fill="x")
+
+def show_question():
+    question = shuffled_quiz[current_question_index]
+    question_label.config(text=question["question"])
+
+show_question() 
 
 window.mainloop()
 # display one question and its choices

@@ -16,6 +16,14 @@ for i in range(0, len(lines), 6):
     choice_d = lines[i + 4]
     answer_line = lines[i + 5]
 
+    # extract actual text
+    question = question_line.replace("Question: ", "")
+    a = choice_a.replace("a. ", "")
+    b = choice_b.replace("b. ", "")
+    c = choice_c.replace("c. ", "")
+    d = choice_d.replace("d. ", "")
+    correct_letter = answer_line.replace("Correct answer:", "").strip().upper()
+
 # randomize the question order
 # create the main window
 # display one question and its choices

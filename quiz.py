@@ -51,7 +51,7 @@ current_question_index = 0
 window = Tk()
 
 window.title(filename)
-window.geometry("700x420")
+window.geometry("700x380")
 window.config(bg="#f2f2f2")
 
 question_label = Label(window, text="", font=("Montserrat Black", 11, "bold"), bg="white", height=2)
@@ -60,6 +60,18 @@ question_label.pack(fill="x")
 image = PhotoImage(file="image.png").subsample(5, 5)
 image_label = Label(window, image=image)
 image_label.pack() 
+
+red_button = Button(window, text="", font=("Montserrat Black", 11), bg="#e21b3c", fg="white", height=3, padx=175)
+red_button.place(x=0, y=260)
+
+blue_button = Button(window, text="", font=("Montserrat Black", 11), bg="#1368ce", fg="white", height=3, padx=175)
+blue_button.place(x=350, y=260)
+
+green_button = Button(window, text="", font=("Montserrat Black", 11), bg="#298a11", fg="white", height=3, padx=175)
+green_button.place(x=350, y=320)
+
+orange_button = Button(window, text="", font=("Montserrat Black", 11), bg="#d89e0a", fg="white", height=3, padx=170)
+orange_button.place(x=0, y=320)
 
 def show_question():
     question = shuffled_quiz[current_question_index]

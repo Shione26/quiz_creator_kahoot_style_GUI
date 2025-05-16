@@ -24,6 +24,21 @@ for i in range(0, len(lines), 6):
     d = choice_d.replace("d. ", "")
     correct_letter = answer_line.replace("Correct answer:", "").strip().upper()
 
+    # store choices in a list
+    choices = [a, b, c, d]
+
+    # figure out the correct answer using the position of the letter
+    letter_index = ["A", "B", "C", "D"].index(correct_letter)
+    correct_answer = choices[letter_index]
+
+    # add to the quiz data list
+    quiz_data.append({
+        "question": question,
+        "options": choices,
+        "answer": correct_answer
+    })
+    
+print(quiz_data)
 # randomize the question order
 # create the main window
 # display one question and its choices

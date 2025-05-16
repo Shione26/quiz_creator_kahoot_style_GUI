@@ -51,11 +51,15 @@ current_question_index = 0
 window = Tk()
 
 window.title(filename)
-window.geometry("700x400")
+window.geometry("700x420")
 window.config(bg="#f2f2f2")
 
 question_label = Label(window, text="", font=("Montserrat Black", 11, "bold"), bg="white", height=2)
 question_label.pack(fill="x")
+
+image = PhotoImage(file="image.png").subsample(5, 5)
+image_label = Label(window, image=image)
+image_label.pack() 
 
 def show_question():
     question = shuffled_quiz[current_question_index]

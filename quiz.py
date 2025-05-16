@@ -1,5 +1,6 @@
 # Create the Quiz program that read the output file of the Quiz Creator. The user will answer the randomly selected question and check if the answer is correct.
 
+from tkinter import *
 import random
 
 # read the file
@@ -44,25 +45,15 @@ for i in range(0, len(lines), 6):
 shuffled_quiz = random.sample(quiz_data, len(quiz_data))
 
 # loop through the randomized questions list
-for item in shuffled_quiz:
-    print("Question:", item["question"])
-    print("A.", item["options"][0])
-    print("B.", item["options"][1])
-    print("C.", item["options"][2])
-    print("D.", item["options"][3])
-    
-    user_answer = input("Enter your answer (A/B/C/D): ").strip().upper()
-
-    if user_answer in ["A", "B", "C", "D"]:
-        selected = item["options"][["A", "B", "C", "D"].index(user_answer)]
-        if selected == item["answer"]:
-            print("Correct!\n")
-        else:
-            print(f"Wrong. Correct answer is: {item['answer']}\n")
-    else:
-        print("Invalid input.\n")
 
 # create the main window
+window = Tk()
+
+window.title(filename)
+window.geometry("700x500")
+window.config(bg="#f2f2f2")
+
+window.mainloop()
 # display one question and its choices
 # check user input
 # give feedback whether the answer is correct or not

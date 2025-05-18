@@ -55,6 +55,7 @@ window.title(filename)
 window.geometry("700x380")
 window.config(bg="#f2f2f2")
 
+# create the question label
 question_label = Label(window, text="", font=("Montserrat Black", 11, "bold"), bg="white", height=2)
 question_label.pack(fill="x")
 
@@ -62,16 +63,17 @@ image = PhotoImage(file="image.png").subsample(5, 5)
 image_label = Label(window, image=image)
 image_label.pack() 
 
-red_button = Button(window, text="", font=("Montserrat Black", 10, "bold"), bg="#e21b3c", fg="white", height=3, padx=175, anchor="center")
+# create the buttons
+red_button = Button(window, text="", font=("Montserrat Black", 10, "bold"), bg="#e21b3c", fg="white", height=3, padx=165, anchor="center")
 red_button.place(x=0, y=260)
 
-blue_button = Button(window, text="", font=("Montserrat Black", 10, "bold"), bg="#1368ce", fg="white", height=3, padx=170, anchor="center")
+blue_button = Button(window, text="", font=("Montserrat Black", 10, "bold"), bg="#1368ce", fg="white", height=3, padx=159, anchor="center")
 blue_button.place(x=350, y=260)
 
-orange_button = Button(window, text="", font=("Montserrat Black", 10, "bold"), bg="#d89e0a", fg="white", height=3, padx=170, anchor="center")
+orange_button = Button(window, text="", font=("Montserrat Black", 10, "bold"), bg="#d89e0a", fg="white", height=3, padx=165, anchor="center")
 orange_button.place(x=0, y=320)
 
-green_button = Button(window, text="", font=("Montserrat Black", 10, "bold"), bg="#298a11", fg="white", height=3, padx=175, anchor="center")
+green_button = Button(window, text="", font=("Montserrat Black", 10, "bold"), bg="#298a11", fg="white", height=3, padx=165, anchor="center")
 green_button.place(x=350, y=320)
 
 # create the feedback label
@@ -94,6 +96,17 @@ def handle_answer(selected_text):
     current_question_index += 1
     if current_question_index < len(shuffled_quiz):
         window.after(1000, show_question)
+    else:
+        window.after(1000, show_result) 
+
+# display score at the end
+def show_result():
+    question_label.config(text="Quiz Finished!")
+    red_button.place_forget()  # removing the buttons
+    blue_button.place_forget() 
+    orange_button.place_forget()
+    green_button.place_forget()
+    feedback_label.config(text=f"Your Score: {score}/{len(shuffled_quiz)}", fg="blue")
 
 # display one question and its choices
 def show_question():
@@ -106,9 +119,5 @@ def show_question():
     green_button.config(text=question["options"][2], command=lambda: handle_answer(question["options"][2]))
     orange_button.config(text=question["options"][3], command=lambda: handle_answer(question["options"][3]))
 
-
 show_question()
-
 window.mainloop()
-
-# display score at the end

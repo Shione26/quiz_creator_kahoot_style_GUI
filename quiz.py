@@ -44,6 +44,7 @@ for index in range(0, len(lines), 6):
 # randomize the question order
 shuffled_quiz = random.sample(quiz_data, len(quiz_data))
 current_question_index = 0
+score = 0   # track score
 
 # loop through the randomized questions list
 
@@ -73,23 +74,41 @@ orange_button.place(x=0, y=320)
 green_button = Button(window, text="", font=("Montserrat Black", 10, "bold"), bg="#298a11", fg="white", height=3, padx=175, anchor="center")
 green_button.place(x=350, y=320)
 
+# create the feedback label
+feedback_label = Label(window, text="", font=("Montserrat Black", 11, "bold"), bg="#f2f2f2", fg="black")
+feedback_label.pack()
+
+# function to handle the answer selection
+def handle_answer(selected_text):
+    global current_question_index, score
+
+    # check user input
+    correct = shuffled_quiz[current_question_index]["answer"]
+    if selected_text == correct:
+        score += 1
+        feedback_label.config(text="✅ Correct!", fg="green") # give feedback whether the answer is correct or not
+    else:
+        feedback_label.config(text=f"❌ Wrong! Correct answer: {correct}", fg="red")
+
+    # to check if there is more question next
+    current_question_index += 1
+    if current_question_index < len(shuffled_quiz):
+        window.after(1000, show_question)
 
 # display one question and its choices
 def show_question():
     question = shuffled_quiz[current_question_index]
     question_label.config(text=question["question"])
+    feedback_label.config(text="")
 
-    red_button.config(text=question["options"][0])
-    blue_button.config(text=question["options"][1])
-    green_button.config(text=question["options"][2])
-    orange_button.config(text=question["options"][3])
+    red_button.config(text=question["options"][0], command=lambda: handle_answer(question["options"][0]))
+    blue_button.config(text=question["options"][1], command=lambda: handle_answer(question["options"][1]))
+    green_button.config(text=question["options"][2], command=lambda: handle_answer(question["options"][2]))
+    orange_button.config(text=question["options"][3], command=lambda: handle_answer(question["options"][3]))
+
 
 show_question()
 
 window.mainloop()
 
-# check user input
-# give feedback whether the answer is correct or not
-
-# track score
 # display score at the end
